@@ -81,3 +81,12 @@ button{
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2.5rem;
 }
+
+
+.active{
+  border: 2px solid rgb(167, 161, 161);
+  
+}
+.inactive{
+  border:  1px solid rgb(86, 81, 81);
+}

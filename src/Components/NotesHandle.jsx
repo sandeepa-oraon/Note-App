@@ -5,8 +5,9 @@ function NotesHandle(props) {
 
     const [isEditing, setIsEditing] = useState(false);
     const [editedText, setEditedText] = useState(notes.title);
+    const [active, setActive] = useState(false)
 
-    const charLimit= 100- notes.title.length
+    const charLimit= 200- notes.title.length
     
     // useEffect(()=>{
     //     console.log(notes);
@@ -19,14 +20,18 @@ function NotesHandle(props) {
     };
     const handleEdit = () => {
         setIsEditing(true)
+        setActive(!active)
     }
     const handleSave = () => {
         setIsEditing(false)
         editHandler(notes.id, editedText)
+        
+        setActive(!active)
     }
     return (
         <div className='noteHandle notes'>
-            <textarea cols={20} rows={5} maxLength={100}
+            <textarea className={active ? 'active' : 'inactive'} 
+                cols={20} rows={5} maxLength={200}
                 value={editedText} readOnly={!isEditing}
                 onChange={(e) => setEditedText(e.target.value)}
             ></textarea>

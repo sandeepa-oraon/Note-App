@@ -8,7 +8,7 @@ function CreateNotes() {
     const [inputText, setInputText] = useState("")
     const [notes, setNotes] = useState([]);
     const [text, setText]= useState([])
-    const charLimit= 100 - inputText.length; 
+    const charLimit= 200 - inputText.length; 
     
     useEffect(() => {
         fetch('https://notes-a3fad-default-rtdb.firebaseio.com/notes.json')
@@ -85,7 +85,7 @@ function CreateNotes() {
             {/* <NotesHandle inputText={inputText}/> */}
             
             <div className='notes notes-' >
-                <textarea cols={20} rows={5} maxLength={100} 
+                <textarea cols={20} rows={5} maxLength={200} 
                 placeholder='Type...' value={inputText}
                 onChange={(e) => setInputText(e.target.value)}></textarea>
                 <div className="notesHandle">
