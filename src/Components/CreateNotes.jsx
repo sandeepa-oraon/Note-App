@@ -56,15 +56,27 @@ function CreateNotes() {
         });
     };
 
+    const editHandler = (id, updatedText) => {
+        // Find the note by id and update its title
+        const updatedNote = { title: updatedText };
 
-    // const editHandler = (index) => {
-    //     const updatedText = console.log();
-    //     ('Edit your note:', notes[index]); // Use a simple prompt for editing
-    //     if (updatedText !== null) {
-    //         const updatedNotes = notes.map((note, i) => (i === index ? updatedText : note));
-    //         setNotes(updatedNotes);
-    //     }
-    // }
+        // Update Firebase
+        fetch('https://notes-a3fad-default-rtdb.firebaseio.com/notes/' + id + '.json', {
+            method: 'PUT',
+            body: JSON.stringify(updatedNote),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            // Update the local state after Firebase update
+            const updatedNotes = notes.map((note) =>
+                note.id === id ? { ...note, title: updatedText } : note
+            );
+            setNotes(updatedNotes);
+            console.log('note updated successfully');
+        });
+    };
+
     useEffect(()=> {
         console.log(notes);
     }, [notes])
@@ -84,7 +96,7 @@ function CreateNotes() {
             <div className="note-card">
                 {notes.map((notes) => (
                     <NotesHandle notes={notes} deleteHandler={deleteHandler} key={notes.id}
-                    // editHandler={editHandler} 
+                    editHandler={editHandler} 
                     />
                 ))}
             </div>
